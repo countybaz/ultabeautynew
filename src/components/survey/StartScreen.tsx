@@ -25,11 +25,11 @@ const StartScreen = () => {
   };
   
   return (
-    <div className="max-w-md mx-auto pb-20 md:pb-6">
+    <div className="max-w-md mx-auto pb-28 md:pb-6">
       <SurveyHeader title="Great news! You are among the first to join our Ulta Beauty Program!" />
       
-      <div className="bg-white p-4 md:p-6 rounded-lg shadow-md mb-4 md:mb-6">
-        <p className="text-center text-base md:text-lg mb-3 md:mb-4">
+      <div className="bg-white p-5 md:p-6 rounded-lg shadow-md mb-5 md:mb-6">
+        <p className="text-center text-base md:text-lg mb-4 md:mb-4">
           Get a <span className="text-orange-500 font-semibold">Ulta Beauty Gift Card</span> with the Ulta Beauty Program. Simply click the button below to claim your offer!
         </p>
         
@@ -38,20 +38,17 @@ const StartScreen = () => {
         </p>
       </div>
 
-      <Button 
-        onClick={handleStart} 
-        className={`w-full bg-orange-500 hover:bg-orange-600 text-base md:text-lg py-4 md:py-6 shadow-lg ${isMobile ? 'fixed bottom-4 left-0 right-0 max-w-[90%] mx-auto z-10' : ''}`}
-      >
-        Start <ArrowRight className="ml-2" />
-      </Button>
-
       {/* Facebook Review Section shown on the start screen */}
-      <div className="mt-6">
+      <div className="mt-6 mb-24 md:mb-6">
         <FacebookReviews />
       </div>
 
-      {/* Add some space at the bottom on mobile */}
-      {isMobile && <div className="h-24"></div>}
+      <Button 
+        onClick={handleStart} 
+        className={`w-full bg-orange-500 hover:bg-orange-600 text-base md:text-lg py-5 md:py-6 shadow-lg ${isMobile ? 'fixed bottom-4 left-0 right-0 max-w-[92%] mx-auto z-20 rounded-xl' : ''}`}
+      >
+        Start <ArrowRight className="ml-2" />
+      </Button>
     </div>
   );
 };

@@ -18,7 +18,7 @@ const SurveyContainer = () => {
   }, [currentStep]);
 
   return (
-    <div className="w-full max-w-lg mx-auto px-4 py-6 md:py-8">
+    <div className="w-full max-w-lg mx-auto px-3 sm:px-4 py-4 md:py-8">
       {/* Timer only visible on the results page - 2 minutes timer */}
       {currentStep === 5 && <Timer minutes={2} />}
       
@@ -27,7 +27,7 @@ const SurveyContainer = () => {
       {currentStep === 5 && <Results />}
       
       {/* Facebook Reviews - shown in results step */}
-      {currentStep === 5 && <FacebookReviews />}
+      {currentStep === 5 && <div className="mb-20 md:mb-0"><FacebookReviews /></div>}
     </div>
   );
 };

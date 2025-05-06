@@ -8,7 +8,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 text-center">
       <SurveyProvider>
-        <header className="shadow-sm py-2 bg-white h-24 flex items-center">
+        <header className="shadow-sm py-2 bg-white h-auto md:h-24 flex items-center">
           <div className="container mx-auto px-4 flex items-center justify-center">
             <HeaderContent />
           </div>
@@ -19,12 +19,12 @@ const Index = () => {
         </main>
       </SurveyProvider>
 
-      <footer className="bg-white border-t mt-12">
-        <div className="container mx-auto px-4 py-6 text-center">
+      <footer className="bg-white border-t mt-12 pt-6 pb-24 md:pb-6">
+        <div className="container mx-auto px-4 py-4 text-center">
           {/* Legal Links Section - Header stands out, links are Apple-style */}
           <div className="mb-6">
             <h3 className="font-semibold mb-3 text-gray-800 bg-gray-100 inline-block px-4 py-2 rounded-md">Legal Links</h3>
-            <div className="flex flex-wrap justify-center gap-4 text-sm">
+            <div className="flex flex-wrap justify-center gap-3 text-sm">
               <Link to="/terms" className="text-orange-500 hover:underline">Terms and Conditions</Link>
               <Link to="/privacy" className="text-orange-500 hover:underline">Privacy Policy</Link>
               <Link to="/non-affiliation" className="text-orange-500 hover:underline">Non-Affiliation Disclaimer</Link>
@@ -32,7 +32,7 @@ const Index = () => {
           </div>
           
           {/* Legal Disclaimers */}
-          <div className="text-xs text-gray-600 space-y-2">
+          <div className="text-xs text-gray-600 space-y-2 px-2">
             <p>Trade names or rights associated with all trademarks on this website are the property of their respective owners and are not associated with this promotion. This offer ends at the end of 2025.</p>
             <p>This website is not part of the Facebook website or of Facebook Inc.</p>
             <p>Furthermore, this website is not endorsed in any way by Facebook. Facebook is a trademark of Facebook, Inc.</p>
@@ -60,19 +60,21 @@ const HeaderContent = () => {
   
   return (
     <div 
-      className="flex items-center cursor-pointer" 
+      className="flex flex-col md:flex-row items-center cursor-pointer py-2" 
       onClick={handleLogoClick}
     >
       <img 
         src="/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png" 
         alt="Ulta Beauty Program Logo" 
-        className="h-20 md:h-24 mr-4"
+        className="h-16 md:h-24 mb-2 md:mb-0 md:mr-4"
         loading="eager"
         fetchPriority="high"
       />
-      <h1 className="text-xl font-bold text-orange-500">Ulta Beauty Program</h1>
-      <div className="ml-4">
-        <FAQ />
+      <div className="flex items-center">
+        <h1 className="text-lg md:text-xl font-bold text-orange-500">Ulta Beauty Program</h1>
+        <div className="ml-3">
+          <FAQ />
+        </div>
       </div>
     </div>
   );
