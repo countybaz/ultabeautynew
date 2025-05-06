@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useSurvey } from "@/contexts/SurveyContext";
 import ProductOffer from "@/components/ProductOffer";
@@ -16,17 +16,8 @@ const Results = () => {
   const { answers } = useSurvey();
   const { toast } = useToast();
   const [showingOffer, setShowingOffer] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(true); // Set to true by default for better perceived performance
   const isMobile = useIsMobile();
-
-  // Immediately set image as loaded for faster perceived performance
-  useEffect(() => {
-    setImageLoaded(true);
-    
-    // Still load the actual image for better quality once available
-    const img = new Image();
-    img.src = BEAUTY_IMAGE;
-  }, []);
 
   const handleClaim = () => {
     toast({

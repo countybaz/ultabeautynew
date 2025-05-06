@@ -40,7 +40,7 @@ const Index = () => {
           
           {/* Copyright */}
           <p className="text-xs text-center text-gray-500 mt-6">
-            © {new Date().getFullYear()} Ultra Beauty Program. All rights reserved.
+            © {new Date().getFullYear()} Ulta Beauty Program. All rights reserved.
             <br />
             This is a limited time promotional offer. Terms and conditions apply.
           </p>
@@ -65,10 +65,12 @@ const HeaderContent = () => {
     >
       <img 
         src="/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png" 
-        alt="Ultra Beauty Program Logo" 
+        alt="Ulta Beauty Program Logo" 
         className="h-20 md:h-24 mr-4"
+        loading="eager"
+        fetchPriority="high"
       />
-      <h1 className="text-xl font-bold text-orange-500">Ultra Beauty Program</h1>
+      <h1 className="text-xl font-bold text-orange-500">Ulta Beauty Program</h1>
       <div className="ml-4">
         <FAQ />
       </div>
