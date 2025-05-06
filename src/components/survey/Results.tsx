@@ -59,7 +59,7 @@ const Results = () => {
                       alt="Ulta Beauty products" 
                       className="rounded-md object-cover w-full h-full"
                       loading="eager"
-                      fetchpriority="high"
+                      fetchPriority="high"
                       width="240"
                       height="180"
                       decoding="async"

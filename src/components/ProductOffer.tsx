@@ -50,7 +50,7 @@ const ProductOffer = ({ onClaim }: ProductOfferProps) => {
               width="400"
               height="300"
               loading="eager"
-              fetchpriority="high"
+              fetchPriority="high"
               decoding="async"
               onLoad={() => setImageLoaded(true)}
             />
