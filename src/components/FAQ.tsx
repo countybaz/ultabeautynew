@@ -73,8 +73,8 @@ const FAQ = () => {
               WHAT CAN I GET FROM THIS PROGRAM?
             </AccordionTrigger>
             <AccordionContent className="text-gray-700">
-              By participating in this Program, you can receive $1000 towards the purchase of an iPhone 16 Pro Max. 
-              The iPhone 16 Pro Max offers exceptional performance, sleek design, and advanced features for all your digital needs.
+              By participating in this Program, you can receive an Ulta Beauty gift card.
+              Upgrade your beauty routine with premium skincare and makeup products.
             </AccordionContent>
           </AccordionItem>
           
