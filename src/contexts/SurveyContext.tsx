@@ -28,10 +28,13 @@ interface SurveyProviderProps {
 export const SurveyProvider = ({ children }: SurveyProviderProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
-  const totalSteps = 4;
+  const totalSteps = 1; // Simplified to just 1 step (Start -> Results)
 
   const goToNextStep = () => {
-    setCurrentStep((prev) => Math.min(prev + 1, totalSteps + 1));
+    setCurrentStep((prev) => {
+      // Skip directly to results (step 5)
+      return prev === 0 ? 5 : prev;
+    });
   };
 
   const goToPreviousStep = () => {
@@ -39,7 +42,7 @@ export const SurveyProvider = ({ children }: SurveyProviderProps) => {
   };
 
   const goToStep = (step: number) => {
-    setCurrentStep(Math.max(0, Math.min(step, totalSteps + 1)));
+    setCurrentStep(Math.max(0, Math.min(step, 5)));
   };
 
   const setAnswer = (questionId: string, answer: string) => {
