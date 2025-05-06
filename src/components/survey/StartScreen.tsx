@@ -7,6 +7,9 @@ import FacebookReviews from "@/components/FacebookReviews";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useEffect, useState } from "react";
 
+// Define logo path at the top for easy reference
+const LOGO_IMAGE = "/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png";
+
 const StartScreen = () => {
   const { goToStep } = useSurvey();
   const isMobile = useIsMobile();
@@ -14,9 +17,18 @@ const StartScreen = () => {
   
   // Preload logo image for faster perceived load time
   useEffect(() => {
+    // Set a fast timeout to improve perceived load time
+    const timer = setTimeout(() => setImageLoaded(true), 50);
+    
+    // Actually load the image
     const img = new Image();
-    img.onload = () => setImageLoaded(true);
-    img.src = "/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png";
+    img.onload = () => {
+      clearTimeout(timer);
+      setImageLoaded(true);
+    };
+    img.src = LOGO_IMAGE;
+    
+    return () => clearTimeout(timer);
   }, []);
   
   const handleStart = () => {

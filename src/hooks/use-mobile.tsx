@@ -11,6 +11,7 @@ export function useIsMobile() {
   React.useEffect(() => {
     if (typeof window === 'undefined') return
 
+    // Use resize observer for better performance than resize event
     const checkMobile = () => {
       setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
     }
@@ -18,11 +19,25 @@ export function useIsMobile() {
     // Check immediately
     checkMobile()
     
-    // Add event listener for window resize
-    window.addEventListener("resize", checkMobile)
-    
-    // Cleanup
-    return () => window.removeEventListener("resize", checkMobile)
+    // Use ResizeObserver if available, with fallback to event listener
+    if (typeof ResizeObserver !== 'undefined') {
+      const resizeObserver = new ResizeObserver(checkMobile);
+      resizeObserver.observe(document.body);
+      return () => resizeObserver.disconnect();
+    } else {
+      // Fallback to resize event with debouncing
+      let timeoutId: number | undefined;
+      const debouncedResize = () => {
+        if (timeoutId) window.clearTimeout(timeoutId);
+        timeoutId = window.setTimeout(checkMobile, 100);
+      };
+      
+      window.addEventListener("resize", debouncedResize);
+      return () => {
+        window.removeEventListener("resize", debouncedResize);
+        if (timeoutId) window.clearTimeout(timeoutId);
+      };
+    }
   }, [])
 
   return isMobile

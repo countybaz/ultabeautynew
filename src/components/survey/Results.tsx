@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useSurvey } from "@/contexts/SurveyContext";
 import ProductOffer from "@/components/ProductOffer";
@@ -16,8 +16,24 @@ const Results = () => {
   const { answers } = useSurvey();
   const { toast } = useToast();
   const [showingOffer, setShowingOffer] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(true); // Set to true by default for better perceived performance
+  const [imageLoaded, setImageLoaded] = useState(false);
   const isMobile = useIsMobile();
+  
+  // Preload critical images on component mount
+  useEffect(() => {
+    // Set a fast timeout to improve perceived load time
+    const timer = setTimeout(() => setImageLoaded(true), 50);
+    
+    // Actually load the image
+    const img = new Image();
+    img.onload = () => {
+      clearTimeout(timer);
+      setImageLoaded(true);
+    };
+    img.src = BEAUTY_IMAGE;
+    
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleClaim = () => {
     toast({
@@ -50,11 +66,9 @@ const Results = () => {
                       alt="Ulta Beauty products" 
                       className="rounded-md object-cover w-full h-full"
                       loading="eager"
-                      fetchPriority="high"
                       width="240"
                       height="180"
                       decoding="async"
-                      onLoad={() => setImageLoaded(true)}
                     />
                   )}
                 </AspectRatio>

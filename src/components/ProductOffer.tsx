@@ -21,11 +21,17 @@ const ProductOffer = ({ onClaim }: ProductOfferProps) => {
   // Preload image immediately but with very short timeout
   useEffect(() => {
     // Set a faster timeout for immediate perceived load
-    setImageLoaded(true);
+    const timer = setTimeout(() => setImageLoaded(true), 50);
     
     // Still load the actual image for better quality once available
     const img = new Image();
+    img.onload = () => {
+      clearTimeout(timer);
+      setImageLoaded(true);
+    };
     img.src = BEAUTY_IMAGE;
+    
+    return () => clearTimeout(timer);
   }, []);
   
   return (
@@ -50,9 +56,7 @@ const ProductOffer = ({ onClaim }: ProductOfferProps) => {
               width="400"
               height="300"
               loading="eager"
-              fetchPriority="high"
               decoding="async"
-              onLoad={() => setImageLoaded(true)}
             />
           </AspectRatio>
         </div>
