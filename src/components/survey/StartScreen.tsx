@@ -5,10 +5,19 @@ import { useSurvey } from "@/contexts/SurveyContext";
 import { ArrowRight } from "lucide-react";
 import FacebookReviews from "@/components/FacebookReviews";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useEffect, useState } from "react";
 
 const StartScreen = () => {
   const { goToStep } = useSurvey();
   const isMobile = useIsMobile();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  
+  // Preload logo image for faster perceived load time
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => setImageLoaded(true);
+    img.src = "/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png";
+  }, []);
   
   const handleStart = () => {
     // Skip directly to results page (step 5)
@@ -29,11 +38,14 @@ const StartScreen = () => {
         </p>
       </div>
 
-      <Button onClick={handleStart} className={`w-full bg-orange-500 hover:bg-orange-600 text-base md:text-lg py-4 md:py-6 shadow-lg ${isMobile ? 'fixed bottom-4 left-0 right-0 max-w-[90%] mx-auto z-10' : ''}`}>
+      <Button 
+        onClick={handleStart} 
+        className={`w-full bg-orange-500 hover:bg-orange-600 text-base md:text-lg py-4 md:py-6 shadow-lg ${isMobile ? 'fixed bottom-4 left-0 right-0 max-w-[90%] mx-auto z-10' : ''}`}
+      >
         Start <ArrowRight className="ml-2" />
       </Button>
 
-      {/* Facebook Review Section - kept in the start screen */}
+      {/* Facebook Review Section shown on the start screen */}
       <div className="mt-6">
         <FacebookReviews />
       </div>

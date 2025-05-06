@@ -9,22 +9,25 @@ import FacebookReviews from "@/components/FacebookReviews";
 const SurveyContainer = () => {
   const { currentStep } = useSurvey();
 
-  // Scroll to top when step changes
+  // Scroll to top when step changes - crucial for mobile UX
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"  // Smoother scrolling for better user experience
+    });
   }, [currentStep]);
 
   return (
-    <div className="w-full max-w-lg mx-auto px-4 py-8">
-      {/* Timer only visible on the results page - updated to 2 minutes */}
+    <div className="w-full max-w-lg mx-auto px-4 py-6 md:py-8">
+      {/* Timer only visible on the results page - 2 minutes timer */}
       {currentStep === 5 && <Timer minutes={2} />}
       
       {/* Simplified steps - only start and results */}
       {currentStep === 0 && <StartScreen />}
       {currentStep === 5 && <Results />}
       
-      {/* Facebook Reviews - shown in both steps */}
-      {currentStep !== 0 && <FacebookReviews />}
+      {/* Facebook Reviews - shown in results step */}
+      {currentStep === 5 && <FacebookReviews />}
     </div>
   );
 };

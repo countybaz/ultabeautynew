@@ -3,18 +3,12 @@ import { Button } from "@/components/ui/button";
 import Timer from "@/components/Timer";
 import { Check } from "lucide-react";
 import { useEffect, useState } from "react";
-import IPhoneImageFetcher from "@/components/IPhoneImageFetcher";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 interface ProductOfferProps {
   onClaim: () => void;
-}
-
-interface IPhoneImage {
-  src: string;
-  alt: string;
 }
 
 // Define guaranteed working fallback image with size optimization
@@ -24,19 +18,14 @@ const ProductOffer = ({ onClaim }: ProductOfferProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const isMobile = useIsMobile();
   
-  // Preload fallback image immediately
+  // Preload image immediately but with very short timeout
   useEffect(() => {
-    // Load the beauty image
+    // Set a faster timeout for immediate perceived load
+    setImageLoaded(true);
+    
+    // Still load the actual image for better quality once available
     const img = new Image();
-    img.onload = () => setImageLoaded(true);
     img.src = BEAUTY_IMAGE;
-    
-    // Set a shorter timeout for faster initial render
-    const timeout = setTimeout(() => {
-      setImageLoaded(true);
-    }, 200); // Faster timeout for better mobile UX
-    
-    return () => clearTimeout(timeout);
   }, []);
   
   return (
@@ -61,7 +50,7 @@ const ProductOffer = ({ onClaim }: ProductOfferProps) => {
               width="400"
               height="300"
               loading="eager"
-              fetchPriority="high"
+              fetchpriority="high"
               decoding="async"
               onLoad={() => setImageLoaded(true)}
             />

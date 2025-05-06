@@ -6,7 +6,6 @@ import ProductOffer from "@/components/ProductOffer";
 import SurveyHeader from "@/components/SurveyHeader";
 import { useToast } from "@/components/ui/use-toast";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import IPhoneImageFetcher from "@/components/IPhoneImageFetcher";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -20,18 +19,13 @@ const Results = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const isMobile = useIsMobile();
 
-  // Preload the beauty image for faster display
+  // Immediately set image as loaded for faster perceived performance
   useEffect(() => {
+    setImageLoaded(true);
+    
+    // Still load the actual image for better quality once available
     const img = new Image();
-    img.onload = () => setImageLoaded(true);
     img.src = BEAUTY_IMAGE;
-    
-    // Ultra-fast timeout for immediate display even if image is still loading
-    const timeout = setTimeout(() => {
-      setImageLoaded(true);
-    }, 200); // Even faster timeout for mobile
-    
-    return () => clearTimeout(timeout);
   }, []);
 
   const handleClaim = () => {
@@ -65,9 +59,9 @@ const Results = () => {
                       alt="Ulta Beauty products" 
                       className="rounded-md object-cover w-full h-full"
                       loading="eager"
+                      fetchpriority="high"
                       width="240"
                       height="180"
-                      fetchPriority="high"
                       decoding="async"
                       onLoad={() => setImageLoaded(true)}
                     />
