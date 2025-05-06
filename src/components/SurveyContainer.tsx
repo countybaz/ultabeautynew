@@ -16,8 +16,8 @@ const SurveyContainer = () => {
 
   return (
     <div className="w-full max-w-lg mx-auto px-4 py-8">
-      {/* Timer only visible on the results page */}
-      {currentStep === 5 && <Timer minutes={15} />}
+      {/* Timer only visible on the results page - updated to 2 minutes */}
+      {currentStep === 5 && <Timer minutes={2} />}
       
       {/* Simplified steps - only start and results */}
       {currentStep === 0 && <StartScreen />}

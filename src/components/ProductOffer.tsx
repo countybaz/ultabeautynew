@@ -34,19 +34,19 @@ const ProductOffer = ({ onClaim }: ProductOfferProps) => {
     // Set a shorter timeout for faster initial render
     const timeout = setTimeout(() => {
       setImageLoaded(true);
-    }, 300); // Faster timeout for better UX
+    }, 200); // Faster timeout for better mobile UX
     
     return () => clearTimeout(timeout);
   }, []);
   
   return (
-    <div className="border border-gray-200 rounded-lg shadow-lg p-6 max-w-md mx-auto bg-white pb-20 md:pb-6">
-      <div className="text-center mb-4">
-        <h3 className="text-xl font-bold text-gray-900">Congratulations!</h3>
-        <p className="text-green-600 font-medium">You've qualified for our special offer!</p>
+    <div className="border border-gray-200 rounded-lg shadow-lg p-4 md:p-6 max-w-md mx-auto bg-white pb-20 md:pb-6">
+      <div className="text-center mb-3 md:mb-4">
+        <h3 className="text-lg md:text-xl font-bold text-gray-900">Congratulations!</h3>
+        <p className="text-green-600 font-medium text-sm md:text-base">You've qualified for our special offer!</p>
       </div>
 
-      <div className="mb-6">
+      <div className="mb-4 md:mb-6">
         {/* Display the single beauty image with proper aspect ratio */}
         <div className="w-full relative rounded-md overflow-hidden">
           <AspectRatio ratio={4/3} className="bg-muted">
@@ -69,31 +69,32 @@ const ProductOffer = ({ onClaim }: ProductOfferProps) => {
         </div>
       </div>
 
-      <div className="mb-6">
-        <h4 className="font-bold text-lg mb-2">Ulta Beauty Gift Card</h4>
+      <div className="mb-4 md:mb-6">
+        <h4 className="font-bold text-base md:text-lg mb-2">Ulta Beauty Gift Card</h4>
         <div className="flex items-center mb-1">
-          <Check className="h-4 w-4 text-green-500 mr-2" />
-          <span className="text-gray-700">Premium beauty products</span>
+          <Check className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+          <span className="text-gray-700 text-sm md:text-base">Premium beauty products</span>
         </div>
         <div className="flex items-center mb-1">
-          <Check className="h-4 w-4 text-green-500 mr-2" />
-          <span className="text-gray-700">Skincare & makeup essentials</span>
+          <Check className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+          <span className="text-gray-700 text-sm md:text-base">Skincare & makeup essentials</span>
         </div>
         <div className="flex items-center mb-1">
-          <Check className="h-4 w-4 text-green-500 mr-2" />
-          <span className="text-gray-700">Use in-store or online</span>
+          <Check className="h-4 w-4 text-green-500 mr-2 flex-shrink-0" />
+          <span className="text-gray-700 text-sm md:text-base">Use in-store or online</span>
         </div>
       </div>
 
-      <div className="mb-6 text-center">
+      <div className="mb-4 md:mb-6 text-center">
         <div className="flex items-center justify-center">
-          <span className="text-gray-500 line-through text-lg mr-2">$500.00</span>
-          <span className="text-2xl font-bold text-green-600">$29.99</span>
+          <span className="text-gray-500 line-through text-base md:text-lg mr-2">$500.00</span>
+          <span className="text-xl md:text-2xl font-bold text-green-600">$29.99</span>
         </div>
-        <p className="text-orange-500 font-medium text-sm mt-1">+ FREE Shipping</p>
+        <p className="text-orange-500 font-medium text-xs md:text-sm mt-1">+ FREE Shipping</p>
       </div>
 
-      <Timer minutes={15} />
+      {/* Timer has been set to 2 minutes in SurveyContainer.tsx */}
+      <Timer minutes={2} />
 
       <a 
         href="https://glstrck.com/aff_c?offer_id=839&aff_id=25969" 
@@ -102,13 +103,13 @@ const ProductOffer = ({ onClaim }: ProductOfferProps) => {
         className="block w-full"
       >
         <Button 
-          className={`w-full py-6 text-lg bg-green-600 hover:bg-green-700 shadow-lg ${isMobile ? 'fixed bottom-4 left-0 right-0 max-w-xs mx-auto z-10' : 'mt-6'}`}
+          className={`w-full py-4 md:py-6 text-base md:text-lg bg-green-600 hover:bg-green-700 shadow-lg ${isMobile ? 'fixed bottom-4 left-0 right-0 max-w-[90%] mx-auto z-10' : 'mt-4 md:mt-6'}`}
         >
           CLAIM NOW
         </Button>
       </a>
 
-      <p className="text-xs text-center text-gray-500 mt-4">
+      <p className="text-[10px] md:text-xs text-center text-gray-500 mt-3 md:mt-4">
         Limited quantity available. Offer valid while supplies last.
       </p>
     </div>

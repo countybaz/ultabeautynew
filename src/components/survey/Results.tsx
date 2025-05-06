@@ -29,7 +29,7 @@ const Results = () => {
     // Ultra-fast timeout for immediate display even if image is still loading
     const timeout = setTimeout(() => {
       setImageLoaded(true);
-    }, 300); // Super fast timeout
+    }, 200); // Even faster timeout for mobile
     
     return () => clearTimeout(timeout);
   }, []);
@@ -43,18 +43,18 @@ const Results = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto px-4">
+    <div className="max-w-md mx-auto px-2 md:px-4">
       {!showingOffer ? (
         <>
           <SurveyHeader 
             title="Congratulations!" 
             subtitle="Fantastic news! Your participation is confirmed. Continue to the next step to receive your Ulta Beauty gift card:"
-            className="mb-4"
+            className="mb-3 md:mb-4"
           />
           
-          <div className="mb-4 space-y-3">
+          <div className="mb-3 md:mb-4 space-y-2 md:space-y-3">
             {/* Product Image - using the beauty products image with proper aspect ratio */}
-            <div className="bg-white p-3 rounded-lg shadow-sm">
+            <div className="bg-white p-2 md:p-3 rounded-lg shadow-sm">
               <div className="max-w-[240px] mx-auto">
                 <AspectRatio ratio={4/3} className="bg-muted">
                   {!imageLoaded ? (
@@ -78,14 +78,14 @@ const Results = () => {
             
             {/* Orange promotional text */}
             <div className="text-center px-3 py-2 bg-orange-50 rounded-lg border border-orange-100">
-              <p className="text-orange-600 font-medium text-sm">
+              <p className="text-orange-600 font-medium text-xs md:text-sm">
                 Upgrade your beauty routine! Claim Ulta Beauty products and elevate your self-care!
               </p>
             </div>
           </div>
           
           {/* Fixed CTA button for mobile - Updated with new URL */}
-          <div className={isMobile ? "sticky bottom-4 z-10 mt-4" : ""}>
+          <div className={isMobile ? "sticky bottom-4 z-10 mt-4 px-1" : ""}>
             <a 
               href="https://glstrck.com/aff_c?offer_id=839&aff_id=25969" 
               target="_blank" 
@@ -93,14 +93,14 @@ const Results = () => {
               className="block w-full"
             >
               <Button 
-                className={`w-full bg-orange-500 hover:bg-orange-600 py-6 text-lg ${isMobile ? 'shadow-lg' : ''}`}
+                className={`w-full bg-orange-500 hover:bg-orange-600 py-4 md:py-6 text-base md:text-lg ${isMobile ? 'shadow-lg' : ''}`}
               >
                 Continue to Claim Your Reward
               </Button>
             </a>
           </div>
           
-          <p className="text-sm text-center text-gray-500 mt-4 pb-16">
+          <p className="text-xs md:text-sm text-center text-gray-500 mt-3 md:mt-4 pb-16">
             Limited time offer. Your reward is reserved for the time shown in the timer.
           </p>
         </>
