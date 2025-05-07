@@ -69,7 +69,7 @@ const Results = () => {
               className="block w-full"
             >
               <Button 
-                className={`w-full bg-orange-500 hover:bg-orange-600 py-5 md:py-6 text-xl md:text-lg font-bold ${isMobile ? 'shadow-lg rounded-xl' : ''}`}
+                className={`w-full bg-green-600 hover:bg-green-700 py-5 md:py-6 text-xl md:text-lg font-bold ${isMobile ? 'shadow-lg rounded-xl h-16 text-2xl' : ''}`}
               >
                 Continue to Claim Your Reward
               </Button>
