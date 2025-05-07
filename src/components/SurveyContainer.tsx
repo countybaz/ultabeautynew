@@ -1,12 +1,15 @@
 
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { useSurvey } from "@/contexts/SurveyContext";
-import StartScreen from "@/components/survey/StartScreen";
-import Results from "@/components/survey/Results";
 import Timer from "@/components/Timer";
 import FacebookReviews from "@/components/FacebookReviews";
 
-// Define and preload critical components conditionally
+// Regular import for the start screen (critical path)
+import StartScreen from "@/components/survey/StartScreen";
+
+// Lazy import for the results screen (loaded only when needed)
+const Results = lazy(() => import("@/components/survey/Results"));
+
 const SurveyContainer = () => {
   const { currentStep } = useSurvey();
 
@@ -16,13 +19,8 @@ const SurveyContainer = () => {
       top: 0,
       behavior: "smooth"  // Smoother scrolling for better user experience
     });
-    
-    // Preload the Results component when on the start screen
-    if (currentStep === 0) {
-      import("@/components/survey/Results");
-    }
   }, [currentStep]);
-
+  
   // Only render what's needed based on the current step
   const renderCurrentStep = () => {
     switch (currentStep) {
@@ -30,12 +28,14 @@ const SurveyContainer = () => {
         return <StartScreen />;
       case 5:
         return (
-          <>
-            <Results />
-            <div className="mb-20 md:mb-0">
-              <FacebookReviews />
-            </div>
-          </>
+          <Suspense fallback={<div className="text-center py-8">Loading your results...</div>}>
+            <>
+              <Results />
+              <div className="mb-20 md:mb-0">
+                <FacebookReviews />
+              </div>
+            </>
+          </Suspense>
         );
       default:
         // Fallback to start screen if unexpected step

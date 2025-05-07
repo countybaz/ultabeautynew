@@ -5,26 +5,31 @@ const MOBILE_BREAKPOINT = 768
 
 export function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState<boolean>(
-    typeof window !== 'undefined' ? window.innerWidth < MOBILE_BREAKPOINT : false
+    typeof window !== 'undefined' ? window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`).matches : false
   )
 
   React.useEffect(() => {
     if (typeof window === 'undefined') return
 
-    // Define the check function
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
-    }
+    // Use matchMedia for more efficient mobile detection
+    const mediaQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
     
-    // Check immediately on mount
-    checkMobile()
+    // Set initial value
+    setIsMobile(mediaQuery.matches);
     
-    // Add event listener with immediate check
-    window.addEventListener("resize", checkMobile)
+    // Use the more efficient event listener
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+    };
     
-    // Cleanup
-    return () => {
-      window.removeEventListener("resize", checkMobile)
+    // Use the modern API if available
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    } else {
+      // Fallback for older browsers
+      mediaQuery.addListener(handleChange);
+      return () => mediaQuery.removeListener(handleChange);
     }
   }, [])
 

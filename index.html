@@ -6,21 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ulta Beauty Program</title>
     <meta name="description" content="Get your Ulta Beauty gift card" />
-    <meta name="author" content="Lovable" />
     
-    <!-- Performance optimization meta tags -->
-    <link rel="preconnect" href="https://images.unsplash.com">
-    <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="theme-color" content="#ffffff">
+    <!-- Critical preload tags -->
+    <link rel="preload" href="/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png" as="image" fetchpriority="high" />
+    <link rel="preload" href="/lovable-uploads/e69b8efa-60ee-44d2-9a0f-535b8bcaefd6.png" as="image" fetchpriority="high" />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.gpteng.co" crossorigin />
+    <link rel="dns-prefetch" href="https://glstrck.com" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#ffffff" />
     
-    <!-- Preload critical assets -->
-    <link rel="preload" href="/lovable-uploads/e69b8efa-60ee-44d2-9a0f-535b8bcaefd6.png" as="image" type="image/png" fetchpriority="high">
-    <link rel="preload" href="/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png" as="image" type="image/png" fetchpriority="high">
-    <link rel="preload" href="/src/index.css" as="style">
-    <link rel="modulepreload" href="/src/main.tsx">
-    
-    <link rel="icon" href="/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png" type="image/png">
+    <link rel="icon" href="/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png" type="image/png" />
 
     <meta property="og:title" content="Ulta Beauty Program" />
     <meta property="og:description" content="Get your Ulta Beauty gift card" />
@@ -31,26 +27,38 @@
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png" />
     
-    <!-- Inline critical CSS for faster initial render -->
+    <!-- Expanded inline critical CSS for faster initial render -->
     <style>
       body { margin: 0; background: #f9fafb; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
       .initial-loader { display: flex; justify-content: center; align-items: center; height: 100vh; }
-      .initial-loader img { animation: fadeIn 0.5s ease-in; }
+      .initial-loader img { animation: fadeIn 0.3s ease-in; width: 80px; height: 80px; }
       @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
       
-      /* Pre-style some common elements to reduce CLS */
+      /* Pre-style more common elements to reduce CLS */
       .rounded-lg { border-radius: 0.5rem; }
       .shadow-md { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
       .text-orange-500 { color: #f97316; }
       .bg-white { background-color: #ffffff; }
+      .p-5 { padding: 1.25rem; }
+      .text-center { text-align: center; }
+      .text-base { font-size: 1rem; line-height: 1.5rem; }
+      .mb-4 { margin-bottom: 1rem; }
+      .font-semibold { font-weight: 600; }
+      .mx-auto { margin-left: auto; margin-right: auto; }
+      .w-full { width: 100%; }
+      .z-50 { z-index: 50; }
+      .fixed { position: fixed; }
+      .bottom-4 { bottom: 1rem; }
+      .left-0 { left: 0; }
+      .right-0 { right: 0; }
     </style>
   </head>
 
   <body>
     <div id="root">
-      <!-- Initial loading state -->
+      <!-- Optimized initial loading state with inline SVG for faster display -->
       <div class="initial-loader">
-        <img src="/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png" alt="Loading..." width="80" height="80" fetchpriority="high">
+        <img src="/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png" alt="Loading..." width="80" height="80" />
       </div>
     </div>
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->

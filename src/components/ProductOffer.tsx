@@ -1,9 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import Timer from "@/components/Timer";
 import { Check } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
@@ -11,28 +8,11 @@ interface ProductOfferProps {
   onClaim: () => void;
 }
 
-// Define guaranteed working fallback image with size optimization
-const BEAUTY_IMAGE = "/lovable-uploads/e69b8efa-60ee-44d2-9a0f-535b8bcaefd6.png?q=25&w=400";
+// Define optimized beauty image path
+const BEAUTY_IMAGE = "/lovable-uploads/e69b8efa-60ee-44d2-9a0f-535b8bcaefd6.png";
 
 const ProductOffer = ({ onClaim }: ProductOfferProps) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const isMobile = useIsMobile();
-  
-  // Preload image immediately but with very short timeout
-  useEffect(() => {
-    // Set a faster timeout for immediate perceived load
-    const timer = setTimeout(() => setImageLoaded(true), 50);
-    
-    // Still load the actual image for better quality once available
-    const img = new Image();
-    img.onload = () => {
-      clearTimeout(timer);
-      setImageLoaded(true);
-    };
-    img.src = BEAUTY_IMAGE;
-    
-    return () => clearTimeout(timer);
-  }, []);
   
   return (
     <div className="border border-gray-200 rounded-lg shadow-lg p-4 md:p-6 max-w-md mx-auto bg-white pb-28 md:pb-6">
@@ -42,21 +22,17 @@ const ProductOffer = ({ onClaim }: ProductOfferProps) => {
       </div>
 
       <div className="mb-5 md:mb-6">
-        {/* Display the single beauty image with proper aspect ratio */}
+        {/* Display the beauty image with proper aspect ratio and optimized loading */}
         <div className="w-full relative rounded-md overflow-hidden">
           <AspectRatio ratio={4/3} className="bg-muted">
-            {!imageLoaded ? (
-              <Skeleton className="w-full h-full absolute inset-0 rounded-md" />
-            ) : null}
             <img 
-              src={BEAUTY_IMAGE} 
+              src={BEAUTY_IMAGE}
               alt="Ulta Beauty Products" 
-              className={`w-full h-full object-cover rounded-md ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-              style={{ transition: 'opacity 0.1s' }} // Faster transition
+              className="w-full h-full object-cover rounded-md"
               width="400"
               height="300"
+              decoding="sync"
               loading="eager"
-              decoding="async"
             />
           </AspectRatio>
         </div>
@@ -85,9 +61,6 @@ const ProductOffer = ({ onClaim }: ProductOfferProps) => {
         </div>
         <p className="text-orange-500 font-medium text-xs md:text-sm mt-2">+ FREE Shipping</p>
       </div>
-
-      {/* Timer has been set to 2 minutes in SurveyContainer.tsx */}
-      <Timer minutes={2} />
 
       <a 
         href="https://glstrck.com/aff_c?offer_id=839&aff_id=25969" 

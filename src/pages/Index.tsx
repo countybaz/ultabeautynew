@@ -1,8 +1,13 @@
 
 import { SurveyProvider, useSurvey } from "@/contexts/SurveyContext";
-import SurveyContainer from "@/components/SurveyContainer";
-import FAQ from "@/components/FAQ";
+import { lazy, Suspense, memo } from "react";
 import { Link } from "react-router-dom";
+
+// Import critical components directly
+import SurveyContainer from "@/components/SurveyContainer";
+
+// Lazy load non-critical components
+const FAQ = lazy(() => import("@/components/FAQ"));
 
 const Index = () => {
   return (
@@ -50,8 +55,8 @@ const Index = () => {
   );
 };
 
-// Create a separate component for the header content
-const HeaderContent = () => {
+// Create an optimized separate component for the header content
+const HeaderContent = memo(() => {
   const { goToStep } = useSurvey();
   
   const handleLogoClick = () => {
@@ -68,16 +73,22 @@ const HeaderContent = () => {
         alt="Ulta Beauty Program Logo" 
         className="h-16 md:h-24 mb-2 md:mb-0 md:mr-4"
         loading="eager"
-        fetchPriority="high"
+        width="64"
+        height="64"
+        decoding="async"
       />
       <div className="flex items-center">
         <h1 className="text-lg md:text-xl font-bold text-orange-500">Ulta Beauty Program</h1>
         <div className="ml-3">
-          <FAQ />
+          <Suspense fallback={<div className="w-8 h-8" />}>
+            <FAQ />
+          </Suspense>
         </div>
       </div>
     </div>
   );
-};
+});
+
+HeaderContent.displayName = 'HeaderContent';
 
 export default Index;

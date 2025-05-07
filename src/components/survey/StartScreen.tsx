@@ -5,7 +5,7 @@ import { useSurvey } from "@/contexts/SurveyContext";
 import { ArrowRight } from "lucide-react";
 import FacebookReviews from "@/components/FacebookReviews";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useEffect, useState } from "react";
+import { useState, useId } from "react";
 
 // Define logo path at the top for easy reference
 const LOGO_IMAGE = "/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png";
@@ -13,24 +13,8 @@ const LOGO_IMAGE = "/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png";
 const StartScreen = () => {
   const { goToStep } = useSurvey();
   const isMobile = useIsMobile();
-  const [imageLoaded, setImageLoaded] = useState(false);
-  
-  // Preload logo image for faster perceived load time
-  useEffect(() => {
-    // Set a fast timeout to improve perceived load time
-    const timer = setTimeout(() => setImageLoaded(true), 50);
-    
-    // Actually load the image
-    const img = new Image();
-    img.onload = () => {
-      clearTimeout(timer);
-      setImageLoaded(true);
-    };
-    img.src = LOGO_IMAGE;
-    
-    return () => clearTimeout(timer);
-  }, []);
-  
+  const uniqueId = useId(); // For stable IDs
+
   const handleStart = () => {
     // Skip directly to results page (step 5)
     goToStep(5);
@@ -58,6 +42,7 @@ const StartScreen = () => {
       {/* Ensure the button is always visible and properly styled */}
       <Button 
         onClick={handleStart} 
+        id={`start-button-${uniqueId}`}
         className={`w-full bg-orange-500 hover:bg-orange-600 text-xl md:text-lg py-6 md:py-6 shadow-lg font-bold ${
           isMobile ? 'fixed bottom-4 left-0 right-0 max-w-[92%] mx-auto z-50 rounded-xl' : ''
         }`}
@@ -67,5 +52,8 @@ const StartScreen = () => {
     </div>
   );
 };
+
+// Add displayName for better debugging
+StartScreen.displayName = 'StartScreen';
 
 export default StartScreen;

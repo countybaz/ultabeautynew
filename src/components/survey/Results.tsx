@@ -1,39 +1,20 @@
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useSurvey } from "@/contexts/SurveyContext";
-import ProductOffer from "@/components/ProductOffer";
 import SurveyHeader from "@/components/SurveyHeader";
 import { useToast } from "@/components/ui/use-toast";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Skeleton } from "@/components/ui/skeleton";
 
-// Define new beauty image path with optimized sizing
-const BEAUTY_IMAGE = "/lovable-uploads/e69b8efa-60ee-44d2-9a0f-535b8bcaefd6.png?q=25&w=400";
+// Optimized beauty image with specified size
+const BEAUTY_IMAGE = "/lovable-uploads/e69b8efa-60ee-44d2-9a0f-535b8bcaefd6.png";
 
 const Results = () => {
   const { answers } = useSurvey();
   const { toast } = useToast();
   const [showingOffer, setShowingOffer] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
   const isMobile = useIsMobile();
-  
-  // Preload critical images on component mount
-  useEffect(() => {
-    // Set a fast timeout to improve perceived load time
-    const timer = setTimeout(() => setImageLoaded(true), 50);
-    
-    // Actually load the image
-    const img = new Image();
-    img.onload = () => {
-      clearTimeout(timer);
-      setImageLoaded(true);
-    };
-    img.src = BEAUTY_IMAGE;
-    
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleClaim = () => {
     toast({
@@ -54,23 +35,19 @@ const Results = () => {
           />
           
           <div className="mb-5 md:mb-4 space-y-3 md:space-y-3">
-            {/* Product Image - using the beauty products image with proper aspect ratio */}
+            {/* Product Image with native loading optimization */}
             <div className="bg-white p-3 md:p-3 rounded-lg shadow-sm">
               <div className="max-w-[240px] mx-auto">
                 <AspectRatio ratio={4/3} className="bg-muted">
-                  {!imageLoaded ? (
-                    <Skeleton className="w-full h-full rounded-md" />
-                  ) : (
-                    <img 
-                      src={BEAUTY_IMAGE} 
-                      alt="Ulta Beauty products" 
-                      className="rounded-md object-cover w-full h-full"
-                      loading="eager"
-                      width="240"
-                      height="180"
-                      decoding="async"
-                    />
-                  )}
+                  <img 
+                    src={BEAUTY_IMAGE}
+                    alt="Ulta Beauty products" 
+                    className="rounded-md object-cover w-full h-full"
+                    width="240"
+                    height="180"
+                    decoding="sync"
+                    loading="eager"
+                  />
                 </AspectRatio>
               </div>
             </div>
@@ -103,9 +80,7 @@ const Results = () => {
             Limited time offer. Your reward is reserved for the time shown in the timer.
           </p>
         </>
-      ) : (
-        <ProductOffer onClaim={handleClaim} />
-      )}
+      ) : null}
     </div>
   );
 };
