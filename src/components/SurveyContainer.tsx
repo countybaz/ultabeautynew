@@ -38,7 +38,8 @@ const SurveyContainer = () => {
           </>
         );
       default:
-        return null;
+        // Fallback to start screen if unexpected step
+        return <StartScreen />;
     }
   };
 
@@ -47,7 +48,7 @@ const SurveyContainer = () => {
       {/* Timer only visible on the results page - 2 minutes timer */}
       {currentStep === 5 && <Timer minutes={2} />}
       
-      {/* Render only the current step */}
+      {/* Render the current step */}
       {renderCurrentStep()}
     </div>
   );

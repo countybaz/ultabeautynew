@@ -83,8 +83,8 @@ const Results = () => {
             </div>
           </div>
           
-          {/* Fixed CTA button for mobile - Updated with new URL */}
-          <div className={isMobile ? "fixed bottom-4 left-0 right-0 z-20 px-4" : ""}>
+          {/* Fixed CTA button for mobile with higher z-index to ensure it's always visible */}
+          <div className={isMobile ? "fixed bottom-4 left-0 right-0 z-50 px-4" : ""}>
             <a 
               href="https://glstrck.com/aff_c?offer_id=839&aff_id=25969" 
               target="_blank" 
@@ -92,7 +92,7 @@ const Results = () => {
               className="block w-full"
             >
               <Button 
-                className={`w-full bg-orange-500 hover:bg-orange-600 py-5 md:py-6 text-base md:text-lg ${isMobile ? 'shadow-lg rounded-xl' : ''}`}
+                className={`w-full bg-orange-500 hover:bg-orange-600 py-5 md:py-6 text-xl md:text-lg font-bold ${isMobile ? 'shadow-lg rounded-xl' : ''}`}
               >
                 Continue to Claim Your Reward
               </Button>
