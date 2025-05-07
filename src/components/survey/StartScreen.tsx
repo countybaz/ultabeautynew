@@ -39,12 +39,12 @@ const StartScreen = () => {
         <FacebookReviews />
       </div>
 
-      {/* Ensure the button is always visible and properly styled */}
+      {/* Enlarged button for mobile users */}
       <Button 
         onClick={handleStart} 
         id={`start-button-${uniqueId}`}
         className={`w-full bg-orange-500 hover:bg-orange-600 text-xl md:text-lg py-6 md:py-6 shadow-lg font-bold ${
-          isMobile ? 'fixed bottom-4 left-0 right-0 max-w-[92%] mx-auto z-50 rounded-xl' : ''
+          isMobile ? 'fixed bottom-4 left-0 right-0 max-w-[92%] mx-auto z-50 rounded-xl h-16 text-2xl' : ''
         }`}
       >
         Start <ArrowRight className="ml-2 h-6 w-6" />

@@ -33,6 +33,12 @@ const ProductOffer = ({ onClaim }: ProductOfferProps) => {
               height="300"
               decoding="sync"
               loading="eager"
+              onError={(e) => {
+                // Fallback if image fails to load
+                e.currentTarget.onerror = null;
+                console.log("Product image failed to load, using fallback");
+                e.currentTarget.src = "/placeholder.svg";
+              }}
             />
           </AspectRatio>
         </div>
@@ -69,7 +75,7 @@ const ProductOffer = ({ onClaim }: ProductOfferProps) => {
         className="block w-full"
       >
         <Button 
-          className={`w-full py-5 md:py-6 text-xl font-bold md:text-lg bg-green-600 hover:bg-green-700 shadow-lg ${isMobile ? 'fixed bottom-4 left-0 right-0 max-w-[92%] mx-auto z-50 rounded-xl' : 'mt-4 md:mt-6'}`}
+          className={`w-full py-5 md:py-6 text-xl font-bold md:text-lg bg-green-600 hover:bg-green-700 shadow-lg ${isMobile ? 'fixed bottom-4 left-0 right-0 max-w-[92%] mx-auto z-50 rounded-xl h-16 text-2xl' : 'mt-4 md:mt-6'}`}
         >
           CLAIM NOW
         </Button>

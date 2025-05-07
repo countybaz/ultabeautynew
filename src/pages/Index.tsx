@@ -76,6 +76,11 @@ const HeaderContent = memo(() => {
         width="64"
         height="64"
         decoding="async"
+        onError={(e) => {
+          // Fallback if image fails to load
+          e.currentTarget.onerror = null;
+          e.currentTarget.src = "/lovable-uploads/07bbc17e-ed17-4c74-bca2-bcb1eb25135f.png";
+        }}
       />
       <div className="flex items-center">
         <h1 className="text-lg md:text-xl font-bold text-orange-500">Ulta Beauty Program</h1>
